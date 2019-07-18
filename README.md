@@ -1,1 +1,0 @@
-YHWH GIGA TEK
