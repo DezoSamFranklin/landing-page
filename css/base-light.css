@@ -25,13 +25,16 @@
 	=Timeline
 	=Contact + Map
     =Footer
-    =Media Queries
 */
 
 /* =Common Styles
 -------------------------------------------------------------- */
 .logo {
-    color: #424242;
+ border:0;
+ width : 162px;
+ height : 113px;
+ margin : 0;
+ padding : 0;
 }
 
 body {
