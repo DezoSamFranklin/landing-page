@@ -1,13 +1,6 @@
 (function($) {
     $(document).ready(function() {
-        $('.styleswitch').click(function() {
-            switchStylestyle(this.getAttribute("data-rel"));
-            return false;
-        });
-        $('.styleswitch2').click(function() {
-            switchStylestyle2(this.getAttribute("data-rel"));
-            return false;
-        });
+            switchStylestyle2("base-light");
         var c = readCookie('style');
         if (c) switchStylestyle(c);
         var c2 = readCookie('style2');
