@@ -945,14 +945,14 @@
 			</div>
 			<div class="row">
 				<div class="col" style="text-align:center">
-					<form data-toggle="validator" id="contactForm" name="contactForm"  style="text-align:center">
+					<form data-toggle="validator" id="contactForm" name="submit-to-google-sheet"  style="text-align:center">
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
 									<div class="controls">
 										<input class="form-control" name="location" data-error="This section is required."
 											id="location" placeholder="location *" required="" type="text">
-										<div class="help-block with-errors"></div>
+									
 									</div>
 								</div>
 							</div>
@@ -970,7 +970,7 @@
 									<div class="controls">
 										<input class="form-control" name="name" data-error="This section is required." id="name"
 											placeholder="Your Name *" required="" type="text">
-										<div class="help-block with-errors"></div>
+									
 									</div>
 								</div>
 							</div>
@@ -979,7 +979,7 @@
 									<div class="controls">
 										<input class="email form-control" data-error="This section is required."
 											id="email" name="email" placeholder="Email *" required="" type="email">
-										<div class="help-block with-errors"></div>
+									
 									</div>
 								</div>
 							</div>
@@ -990,7 +990,7 @@
 									<div class="controls">
 										<textarea class="form-control" data-error="This section is required."
 											id="message" name="message" placeholder="Message *" required="" rows="5"></textarea>
-										<div class="help-block with-errors"></div>
+									
 									</div>
 								</div>
 							</div>
@@ -1041,9 +1041,42 @@
 		</div>
 	</footer><!-- /.footer -->
 	<!-- Begin Footer -->
-
+	
 	<!-- Javascript Files -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script>
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ5DEC1PUJ2lyN1e-iYlH6aZ2AA4J7RAy2c3UlKLTVfA4vp-Ry/exec'
+		const form = document.forms.contactForm
+	  
+			form.addEventListener('change',e => {
+				const form = document.forms.contactForm
+				var object = {};
+				var formdata = new FormData(form)
+				formdata.forEach(function(value, key){
+    object[key] = value;
+});
+var json = JSON.stringify(object);
+			console.log(json)
+			})
+		form.addEventListener('submit', e => {
+		  e.preventDefault()
+		  var object = {};
+				var formdata = new FormData(form)
+				formdata.forEach(function(value, key){
+    object[key] = value;
+});
+object["timestamp"] = new Date()
+var json = JSON.stringify(object);
+
+
+
+		  fetch(scriptURL, { method: 'POST', body:object})
+			.then(response =>{ console.log('Success!', response)
+			console.log(new FormData(form))
+		})
+			.catch(error => console.error('Error!', error.message))
+		})
+	  </script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArLNT3t4qsJEBmR0R9P_6ueLIQz0Jvt1M&amp;callback=initMap"
 		async defer></script>
