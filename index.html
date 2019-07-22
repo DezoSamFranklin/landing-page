@@ -1045,19 +1045,9 @@
 	<!-- Javascript Files -->
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script>
-		const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ5DEC1PUJ2lyN1e-iYlH6aZ2AA4J7RAy2c3UlKLTVfA4vp-Ry/exec'
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbzQ5DEC1PUJ2lyN1e-iYlH6aZ2AA4J7RAy2c3UlKLTVfA4vp-Ry/dev'
 		const form = document.forms.contactForm
-	  
-			form.addEventListener('change',e => {
-				const form = document.forms.contactForm
-				var object = {};
-				var formdata = new FormData(form)
-				formdata.forEach(function(value, key){
-    object[key] = value;
-});
-var json = JSON.stringify(object);
-			console.log(json)
-			})
+
 		form.addEventListener('submit', e => {
 		  e.preventDefault()
 		  var object = {};
@@ -1065,20 +1055,26 @@ var json = JSON.stringify(object);
 				formdata.forEach(function(value, key){
     object[key] = value;
 });
-object["timestamp"] = new Date()
 var json = JSON.stringify(object);
+let header = new Headers({
+'Access-Control-Allow-Origin':'*',
+'Content-Type': 'multipart/form-data'
+});
+console.log(object)
 
-
-
-		  fetch(scriptURL, { method: 'POST', body:object})
-			.then(response =>{ console.log('Success!', response)
-			console.log(new FormData(form))
+		fetch(scriptURL, {
+			 method: 'POST',
+		headers:header,
+		mode: 'cors', 
+		 body: JSON.stringify(new FormData(form))
 		})
-			.catch(error => console.error('Error!', error.message))
-		})
+      .then(response => console.log(response))
+      .catch(error => console.error(error.message))
+
+	})
 	  </script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArLNT3t4qsJEBmR0R9P_6ueLIQz0Jvt1M&amp;callback=initMap"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw19Bb6ANHsKjZvUjsF21lINVKCactMiI&amp;callback=initMap"
 		async defer></script>
 	<script type="text/javascript">
 		/* ---- Google Maps ---- */
